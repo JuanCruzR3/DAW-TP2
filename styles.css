@@ -1,0 +1,262 @@
+/* Estilos básicos y mobile first */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.header {
+    background-color: rgb(167, 92, 0);
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header__top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px; /* Aumenta aún más la separación entre la fecha y las secciones */
+}
+
+.header__title {
+    font-size: 1.5em;
+}
+
+.header__date {
+    font-size: 0.9em;
+    margin: 0 auto; /* Centra la fecha horizontalmente */
+}
+
+.header__menu-icon {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.nav {
+    display: none;
+}
+
+.nav__list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.nav__list li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.main-news {
+    margin-bottom: 20px;
+}
+
+.news-item {
+    margin-bottom: 20px;
+}
+
+.news-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.news-title {
+    font-size: 1.2em;
+}
+
+.news-description {
+    font-size: 1em;
+}
+
+.news-link {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.advertisements {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ad {
+    background-color: #ccc;
+    padding: 0; /* Elimina el padding */
+    text-align: center;
+    overflow: hidden; /* Asegura que las imágenes no sobresalgan del contenedor */
+    position: relative;
+}
+
+.ad img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cubre el contenedor sin distorsionar la imagen */
+    display: block; /* Elimina el espacio blanco abajo de la imagen */
+    border: none; /* Elimina el borde */
+}
+
+/* Estilos para las páginas de noticias detalladas */
+.news-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.news-detail img {
+    max-width: 100%;
+    height: auto;
+}
+
+.news-content {
+    text-align: justify;
+}
+
+/* Media queries para pantallas más grandes */
+@media (min-width: 768px) {
+    .nav {
+        display: block;
+    }
+
+    .header__menu-icon {
+        display: none;
+    }
+
+    .main {
+        flex-direction: row;
+    }
+
+    .main-news,
+    .secondary-news {
+        flex: 2;
+    }
+
+    .advertisements {
+        flex: 1;
+    }
+
+    .nav__list {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .nav__list li a {
+        padding: 10px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    .header__top {
+        margin-bottom: 20px; /* Mantiene la separación en pantallas grandes */
+    }
+
+    .header__title,
+    .header__date,
+    .header__menu-icon {
+        flex: 1;
+        text-align: center;
+    }
+
+    .header__title {
+        order: 1;
+    }
+
+    .header__date {
+        order: 2;
+        margin-left: auto;
+        margin-right: auto; /* Centra la fecha entre el título y el menú */
+    }
+
+    .header__menu-icon {
+        order: 3;
+    }
+
+    .nav {
+        order: 4;
+        width: 100%;
+        text-align: center;
+    }
+
+    .main {
+        gap: 20px;
+    }
+
+    .main-news-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .secondary-news {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .secondary-news .news-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .secondary-news .news-item img {
+        max-width: 200px; /* Tamaño más grande para las imágenes secundarias */
+        flex-shrink: 0;
+    }
+
+    .advertisements {
+        align-self: flex-start;
+        width: 200px;
+    }
+
+    .ad {
+        margin-bottom: 10px;
+    }
+
+    /* Estilos específicos para centrar contenido en las páginas de detalle */
+    .news-detail {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .news-detail img {
+        width: 100%;
+        max-width: 600px; /* Tamaño uniforme para las imágenes */
+        height: auto;
+    }
+
+    .news-content {
+        max-width: 800px;
+        text-align: justify;
+    }
+}
+
+/* Estilos para el menú hamburguesa */
+.nav.open {
+    display: flex;
+}
