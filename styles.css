@@ -86,8 +86,12 @@ body {
 }
 
 .news-link {
-    color: #007BFF;
+    color: rgb(167, 92, 0);
     text-decoration: none;
+}
+
+.title-word-color {
+    color: rgb(0, 0, 0);
 }
 
 .advertisements {
@@ -112,7 +116,7 @@ body {
     border: none; /* Elimina el borde */
 }
 
-/* Estilos para las páginas de noticias detalladas */
+/* Páginas de noticias detalladas */
 .news-detail {
     display: flex;
     flex-direction: column;
@@ -129,7 +133,7 @@ body {
     text-align: justify;
 }
 
-/* Media queries para pantallas más grandes */
+/* Pantallas más grandes */
 @media (min-width: 768px) {
     .nav {
         display: block;
@@ -237,7 +241,7 @@ body {
         margin-bottom: 10px;
     }
 
-    /* Estilos específicos para centrar contenido en las páginas de detalle */
+    /* Centrar contenido en las páginas de detalle */
     .news-detail {
         max-width: 800px;
         margin: 0 auto;
@@ -246,7 +250,7 @@ body {
 
     .news-detail img {
         width: 100%;
-        max-width: 600px; /* Tamaño uniforme para las imágenes */
+        max-width: 600px; /* Tamaño para las imágenes */
         height: auto;
     }
 
@@ -256,7 +260,96 @@ body {
     }
 }
 
-/* Estilos para el menú hamburguesa */
+/* Menú hamburguesa */
 .nav.open {
     display: flex;
 }
+
+
+
+
+/* Formulario de suscripción */
+.subscription {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.subscription h2 {
+    text-align: center;
+}
+
+.subscription-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.form-group {
+    flex: 1 1 calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.form-submit {
+    flex: 1 1 100%;
+    text-align: center;
+}
+
+.form-submit button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: rgb(167, 92, 0);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-submit button:hover {
+    background-color: rgb(140, 78, 0);
+}
+
+/* Media queries para hacer el formulario responsive */
+@media (max-width: 768px) {
+    .form-group {
+        flex: 1 1 100%;
+    }
+}
+
+
+body {
+    /* Establecer la imagen de fondo */
+    background-image: url('./Images/minimalism-simple-blue-gradient-wallpaper-preview.jpg');
+
+    /* Ajustar la imagen para cubrir toda la página */
+    background-size: cover;
+
+    /* Repetir la imagen vertical y horizontalmente para cubrir toda la página */
+    background-repeat: no-repeat;
+
+    /* Centrar la imagen en la página */
+    background-position: center;
+}
+
