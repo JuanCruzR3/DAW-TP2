@@ -199,7 +199,7 @@ subscriptionForm.addEventListener("submit", async (event) => {
         alert(`Suscripción exitosa. Datos recibidos: ${JSON.stringify(responseData)}`);
 
         //redirigir a index 
-        window.location.href = "index.html";
+        window.location.href = "inicio.html";
     }
      catch (error) {
         modalMessage.textContent = `Error en la suscripción: ${error.message}`;
