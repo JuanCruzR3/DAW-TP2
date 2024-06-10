@@ -26,9 +26,10 @@
         <nav class="nav" id="nav">
             <ul class="nav__list">
                 <li><a href="deportes.html">Deportes</a></li>
-                <li><a href="politica.html">Política</a></li> 
+                <li><a href="politica.html">Política</a></li>
                 <li><a href="Cine.html">Cine</a></li>
                 <li><a href="otros.html">Otros</a></li>
+                <li><a href="suscription.html">Suscripción</a></li>
             </ul>
         </nav>
     </header>
@@ -60,7 +61,6 @@
                 <p class="news-description">Lo último de la inteligencia artificial más famosa del mundo</p>
                 <a href="chat.html" class="news-link">Leer más</a>
             </article>
-
         </section>
         <aside class="advertisements">
             <div class="ad"> 
@@ -68,9 +68,29 @@
             </div>
             <div class="ad">
                  <img src="./Images/ejemplospublicidadproductobk.webp"  alt="No se ha podido cargar la imagen">
-                </div>
+            </div>
         </aside>
+        <div id="welcome-message" class="welcome-message"></div>
     </main>
-    <script src="script.js"></script>
+    <script>
+        
+        // mensaje de bienvenida si el usuario se ha suscrito
+        window.addEventListener('load', () => {
+            const userData = localStorage.getItem('userData');
+            if (userData) {
+                const user = JSON.parse(userData);
+                const welcomeMessage = document.getElementById('welcome-message');
+                alert(`Bienvenido, ${user["full-name"]}! Gracias por suscribirte.`);
+            }
+        });
+
+        const menuIcon = document.querySelector("#menu-icon");
+        const nav = document.querySelector("#nav");
+
+        // Event listener para el icono del menú
+        menuIcon.addEventListener("click", () => {
+            nav.classList.toggle("open");
+        });
+    </script>
 </body>
 </html>

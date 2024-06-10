@@ -1,11 +1,41 @@
 const menuIcon = document.querySelector(".header__menu-icon");
 const nav = document.querySelector(".nav");
 const subscriptionForm = document.getElementById("subscription-form");
+const modal = document.getElementById("modal");
+const closeButton = document.getElementById("close-button");
+const modalMessage = document.getElementById("modal-message");
 
 // Event listener para el icono del menú
 menuIcon.addEventListener("click", () => {
     nav.classList.toggle("open");
 });
+
+// Close the modal
+closeButton.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+// Permitir solo números en un textbox
+const allowOnlyNumbers = (event) => {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+    }
+};
+
+// Permitir solo letras 
+const allowOnlyLetters = (event) => {
+    const charCode = event.which ? event.which : event.keyCode;
+    
+    // Permitir letras (mayúsculas y minúsculas y espacio) 
+    if ((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122) || charCode === 32) {
+        return true;
+    } else {
+        event.preventDefault();
+        return false;
+    }
+};
+
 
 // Validaciones del formulario de suscripción
 const validateField = (field, condition, errorMessage) => {
@@ -45,9 +75,6 @@ document.querySelectorAll("#subscription-form input").forEach(input => {
             case "confirm-password":
                 validateField(event.target, event.target.value === document.getElementById("password").value, "Las contraseñas no coinciden.");
                 break;
-            case "age":
-                validateField(event.target, Number.isInteger(parseInt(event.target.value)) && parseInt(event.target.value) >= 18, "Debe ser un número entero mayor o igual a 18.");
-                break;
             case "phone":
                 validateField(event.target, /^\d{7,}$/.test(event.target.value), "El teléfono debe ser un número de al menos 7 dígitos.");
                 break;
@@ -65,8 +92,13 @@ document.querySelectorAll("#subscription-form input").forEach(input => {
                 break;
             default:
                 break;
-        }
+                case "age":
+                validateField(event.target, Number.isInteger(parseInt(event.target.value)) && parseInt(event.target.value) >= 18 && parseInt(event.target.value) <= 100, "La edad debe ser un número entero entre 18 y 100.");
+                break;
+              }
+
     });
+
 
     // Limpieza del mensaje de error en el evento "focus"
     input.addEventListener("focus", (event) => {
@@ -76,7 +108,7 @@ document.querySelectorAll("#subscription-form input").forEach(input => {
 });
 
 // Validación del formulario en el evento "submit"
-subscriptionForm.addEventListener("submit", (event) => {
+subscriptionForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     let isValid = true;
     const formData = new FormData(subscriptionForm);
@@ -141,26 +173,36 @@ subscriptionForm.addEventListener("submit", (event) => {
         "El DNI debe ser un número de 7 u 8 dígitos."
     );
 
-    if (isValid) {
-        alert("Formulario enviado con éxito:\n");
-
-            window.location.href = "index.html"; 
-    } else {
+    if (!isValid) {
         alert("Hay errores en el formulario. Por favor, corríjalos y vuelva a intentarlo.");
+        return;
     }
-});
 
+    // Enviar datos al servidor
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users', {
+            method: 'POST',
+            body: JSON.stringify(Object.fromEntries(formData)),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
 
-// Validación del formulario en el evento "submit"
-subscriptionForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    let isValid = true;
-    const formData = new FormData(subscriptionForm);
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
 
-    isValid &= validateField(
-        document.getElementById("full-name"),
-        formData.get("full-name").split(' ').length > 1 && formData.get("full-name").length > 6,
-        "El nombre completo debe tener más de 6 letras y al menos un espacio."
-    );
+        const responseData = await response.json();
+        localStorage.setItem('userData', JSON.stringify(responseData));
 
+  
+        alert(`Suscripción exitosa. Datos recibidos: ${JSON.stringify(responseData)}`);
+
+        //redirigir a index 
+        window.location.href = "index.html";
+    }
+     catch (error) {
+        modalMessage.textContent = `Error en la suscripción: ${error.message}`;
+        modal.style.display = 'block';
+    }
 });
